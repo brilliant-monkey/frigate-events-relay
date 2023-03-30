@@ -27,12 +27,4 @@ jobs:
     - name: create image from repository
       run: docker build -t ghcr.io/${{ github.actor }}/${{ env.REPO_NAME }}:${{ steps.tag.outputs.result }} .
     - name: push image to GitHub Container Registry
-      run: docker push ghcr.io/${{ github.actor }}/frigate-kafka-relaty
-    - name: Log in to registry
-      run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
-    - name: Build and push Docker image
-      uses: docker/build-push-action@v4.0.0
-      with:
-        context: .
-        push: true
-        tags: ${{ steps.tag.outputs.result }}
+      run: docker push ghcr.io/${{ github.actor }}/${{ env.REPO_NAME }}
