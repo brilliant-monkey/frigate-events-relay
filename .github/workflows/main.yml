@@ -12,8 +12,8 @@ jobs:
     - uses: actions/github-script@v6
       id: tag
       with:
-        script: |
-          core.exportVariable('IMAGE_TAG', context.sha.substring(0,7))
+        result-encoding: string
+        script: return context.sha.substring(0,7)
     - uses: actions/checkout@v3
     - name: Log in to registry
       run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
@@ -22,4 +22,4 @@ jobs:
       with:
         context: .
         push: true
-        tags: "{{ $IMAGE_TAG }}"
+        tags: ${{ steps.tag.outputs.result }}
