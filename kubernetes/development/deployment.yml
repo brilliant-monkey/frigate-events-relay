@@ -17,11 +17,9 @@ spec:
         app: frigate-kafka-relay
         platform: frigate
     spec:
-      imagePullSecrets:
-      - name: regcred
       containers:
         - name: app
-          image: ghcr.io/brilliant-monkey/frigate-kafka-relay
+          image: ghcr.io/brilliant-monkey/frigate-kafka-relay:23e2a7f
           env:
             - name: FRIGATE_KAFKA_RELAY_CONFIG_PATH
               value: "/app/config.yml"
@@ -29,10 +27,6 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.name
-            - name: PORT
-              value: "80"
-          ports:
-            - containerPort: 80
           resources:
             limits:
               cpu: 2000m
@@ -40,17 +34,6 @@ spec:
             requests:
               cpu: 500m
               memory: 256Mi
-          livenessProbe:
-            httpGet:
-              path: /health
-              scheme: HTTP
-              port: 80
-            initialDelaySeconds: 60
-          readinessProbe:
-            httpGet:
-              path: /health
-              scheme: HTTP
-              port: 80
           volumeMounts:
             - mountPath: /app/config.yml
               subPath: config.yml
