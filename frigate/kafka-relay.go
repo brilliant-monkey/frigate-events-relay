@@ -5,8 +5,8 @@ import (
 	"log"
 
 	"git.brilliantmonkey.net/frigate/frigate-clips/kafka"
-	"git.brilliantmonkey.net/frigate/frigate-clips/mqtt"
 	"git.brilliantmonkey.net/frigate/frigate-clips/types"
+	"github.com/brilliant-monkey/go-mqtt-client"
 )
 
 type FrigateRelay struct {
