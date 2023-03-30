@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frigate-kafka-relay
+  labels:
+    app: frigate-kafka-relay
+    platform: frigate
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frigate-kafka-relay
+      platform: frigate
+  template:
+    metadata:
+      labels:
+        app: frigate-kafka-relay
+        platform: frigate
+    spec:
+      imagePullSecrets:
+      - name: regcred
+      containers:
+        - name: app
+          image: git.brilliantmonkey.net/frigate/kafka-relay
+          env:
+            - name: FRIGATE_KAFKA_RELAY_CONFIG_PATH
+              value: "/app/config.yml"
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: PORT
+              value: "80"
+          ports:
+            - containerPort: 80
+          resources:
+            limits:
+              cpu: 2000m
+              memory: 512Mi
+            requests:
+              cpu: 500m
+              memory: 256Mi
+          livenessProbe:
+            httpGet:
+              path: /health
+              scheme: HTTP
+              port: 80
+            initialDelaySeconds: 60
+          readinessProbe:
+            httpGet:
+              path: /health
+              scheme: HTTP
+              port: 80
+          volumeMounts:
+            - mountPath: /app/config.yml
+              subPath: config.yml
+              name: secret
+      volumes:
+        - name: secret
+          secret:
+            secretName: frigate-kafka-relay-secret
+            
