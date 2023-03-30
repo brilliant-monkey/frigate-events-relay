@@ -21,7 +21,6 @@ jobs:
         registry: ghcr.io
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
-    - uses: actions/checkout@v2
     - name: create image from repository
       run: docker build -t ghcr.io/${{ github.repository }}:${{ steps.tag.outputs.result }} .
     - name: push image to GitHub Container Registry
