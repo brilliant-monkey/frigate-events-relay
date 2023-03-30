@@ -9,22 +9,23 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
-func Load(configPathEnv string, out interface{}) error {
+func Load(configPathEnv string, out interface{}) (err error) {
 	log.Println("Loading config...")
 
 	path := os.Getenv(configPathEnv)
 	bytes, err := os.ReadFile(path)
 	if err != nil {
 		message := fmt.Sprintf("%s environment variable is not set.", configPathEnv)
-		return errors.New(message)
+		err = errors.New(message)
+		return
 	}
 
 	err = yaml.Unmarshal(bytes, out)
 	if err != nil {
-		return err
+		return
 	}
 
 	log.Println("Config loaded successfully.")
 
-	return nil
+	return
 }

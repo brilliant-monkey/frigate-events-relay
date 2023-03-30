@@ -36,12 +36,10 @@ func NewApp() *App {
 	}
 }
 
-func (app *App) LoadConfig(pathEnv string, out interface{}) (err error) {
-	config.Load(pathEnv, out)
-	if err != nil {
+func (app *App) LoadConfig(pathEnv string, out interface{}) {
+	if err := config.Load(pathEnv, out); err != nil {
 		panic(err)
 	}
-	return
 }
 
 func (app *App) Go(process func() error) {
