@@ -20,6 +20,8 @@ jobs:
         registry: ghcr.io
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
+    - name: Pull Latest
+      run: docker pull ghcr.io/${{ github.repository }}:${{ steps.tag.outputs.result }}
     - name: Tag Latest
       run: docker tag ghcr.io/${{ github.repository }}:${{ steps.tag.outputs.result }} ghcr.io/${{ github.repository }}:latest
     - name: Tag Version
