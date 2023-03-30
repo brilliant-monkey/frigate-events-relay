@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - main
-env:
-  REPO_NAME: ${{ github.event.repository.name }}
 
 jobs:
   build:
@@ -25,6 +23,6 @@ jobs:
         password: ${{ secrets.GITHUB_TOKEN }}
     - uses: actions/checkout@v2
     - name: create image from repository
-      run: docker build -t ghcr.io/${{ github.actor }}/${{ env.REPO_NAME }}:${{ steps.tag.outputs.result }} .
+      run: docker build -t ghcr.io/${{ github.repository }}:${{ steps.tag.outputs.result }} .
     - name: push image to GitHub Container Registry
-      run: docker push ghcr.io/${{ github.actor }}/${{ env.REPO_NAME }}
+      run: docker push ghcr.io/${{ github.repository }}:${{ steps.tag.outputs.result }}
