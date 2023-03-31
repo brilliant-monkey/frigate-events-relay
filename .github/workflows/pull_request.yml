@@ -6,9 +6,9 @@ on:
       - "*"
 
 env:
-  SHA: github.sha
-  REPO: github.repository
-  PR: github.event.pull_request.number
+  SHA: ${{ github.sha }}
+  REPO: ${{ github.repository }}
+  PR: ${{ github.event.pull_request.number }}
 
 jobs:
   setup:
@@ -16,9 +16,6 @@ jobs:
     steps:
     - name: tag
       run: |
-        export REPO=${{ env.REPO }}
-        export SHA=${{ env.SHA }}
-        export PR=${{ env.PR }}
         export TAG=$(echo $SHA | cut -c 1-6)
         
         export IMAGE_NAME=$(echo ghcr.io/$REPO:$TAG-$PR)
