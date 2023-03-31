@@ -37,6 +37,6 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
     - name: create image from repository
-      run: docker buildx build --platform linux/amd64 --cache-to type=gha --cache-from type=gha -t ${{ needs.setup.outputs.image_name }}
+      run: docker buildx build --platform linux/amd64 --cache-to type=gha --cache-from type=gha -t ${{ needs.setup.outputs.image_name }} .
     - name: push image to GitHub Container Registry
       run: docker push ${{ needs.setup.outputs.image_name }}
