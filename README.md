@@ -17,21 +17,4 @@ In order to process events more efficiently by other tools (like [Frigate clips]
 
 Use the `docker-compose.yml` file along with the `docker compose up -d` command to create a relay for forwarding Frigate events from MQTT to Kafka.
 
-Before using `docker compose up -d`, make sure a `secret.yml` file is in located in the root of the project folder. You can find an example `secret.yml` below:
-
-```
-mqtt:
-  endpoint: tcp://<mqtt_broker_host>:1883
-  client_id: frigate-kafka-relay
-  consumer:
-    topic: frigate/events
-  username: <mqtt_broker_username>
-  password: <mqtt_broker_password>
-kafka:
-  brokers:
-    # only use one of the items below based on deployment type
-    - kafka.database.svc.cluster.local:9092 # if running in kubernetes
-    - kafa:9093 # if running using the docker-compose.yml file
-  producer:
-    topic: frigate-events
-```
+Before using `docker compose up -d`, make sure a `secret.yml` file is in located in the root of the project folder. An example file `secret.example.yml` is created for you as a template. Rename the file to `secret.yml` and edit it's contents to suit your environment.
