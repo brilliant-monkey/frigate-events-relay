@@ -21,7 +21,7 @@ jobs:
         export PR=${{ env.PR }}
         export TAG=$(echo $SHA | cut -c 1-6)
         
-        export IMAGE_NAME=$(echo "ghcr.io/$REPO:$TAG-$PR")
+        export IMAGE_NAME=$(echo ghcr.io/$REPO:$TAG-$PR)
         echo $IMAGE_NAME
 
         echo "image_name=$IMAGE_NAME" >> $GITHUB_OUTPUT
