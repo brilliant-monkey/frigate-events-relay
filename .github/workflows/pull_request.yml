@@ -6,18 +6,22 @@ on:
       - "*"
 
 env:
+  SHA: github.sha
   REPO: github.repository
   PR: github.event.pull_request.number
 
 jobs:
-  env:
+  setup:
     runs-on: ubuntu-latest
     steps:
     - name: Set tag
-      run: echo "TAG=$(echo $GITHUB_SHA | cut -c 1-6)" >> $GITHUB_ENV
-    - name: Set image name
-      run: echo "IMAGE_NAME=$(echo ghcr.io/"$REPO":"$TAG-$PR")" >> $GITHUB_ENV
+      run: |
+        export TAG="$(echo $SHA | cut -c 1-6)"
+        echo "::set-output name=image_name::$(echo ghcr.io/"$REPO":"$TAG-$PR")"
+    outputs:
+      image_name: "${{ steps.identify.outputs.git_pr_sha}}"
   build:
+    needs: setup
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -28,6 +32,6 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
     - name: create image from repository
-      run: docker buildx build --platform linux/amd64 --cache-to type=gha --cache-from type=gha -t ${{ env.IMAGE_NAME }}
+      run: docker buildx build --platform linux/amd64 --cache-to type=gha --cache-from type=gha -t ${{ needs.setup.outputs.image_name }}
     - name: push image to GitHub Container Registry
-      run: docker push ${{ env.IMAGE_NAME }}
+      run: docker push ${{ needs.setup.outputs.image_name }}
