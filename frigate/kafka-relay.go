@@ -4,8 +4,9 @@ import (
 	"encoding/json"
 	"log"
 
-	"github.com/brilliant-monkey/frigate-kafka-relay/kafka"
+	"github.com/brilliant-monkey/frigate-kafka-relay/config"
 	"github.com/brilliant-monkey/frigate-kafka-relay/types"
+	"github.com/brilliant-monkey/go-kafka-client"
 	"github.com/brilliant-monkey/go-mqtt-client"
 )
 
@@ -14,7 +15,7 @@ type FrigateRelay struct {
 	kafka *kafka.KafkaClient
 }
 
-func NewFrigateRelay(config *types.Config) *FrigateRelay {
+func NewFrigateRelay(config *config.AppConfig) *FrigateRelay {
 	mqtt := mqtt.NewMQTTClient(&config.MQTT)
 	kafka := kafka.NewKafkaClient(&config.Kafka)
 	return &FrigateRelay{
