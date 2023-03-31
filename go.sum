@@ -2,8 +2,8 @@ github.com/brilliant-monkey/go-app v0.0.1 h1:tK0gX6JAqmZGKChcT8mY2U2fizznWmH1g2N
 github.com/brilliant-monkey/go-app v0.0.1/go.mod h1:BTm1vpWiIJrTs6mg41MpCv9V8k7TLTc3uoyfHwaHWmo=
 github.com/brilliant-monkey/go-kafka-client v0.0.1 h1:mn6+o7/UGTfRcXWZy3TufIgGykGn658UJeeBbtCAYRw=
 github.com/brilliant-monkey/go-kafka-client v0.0.1/go.mod h1:PKz8rIWd5CxlOkLdznABeERbZINQ5MPIBBa9nN1apfA=
-github.com/brilliant-monkey/go-mqtt-client v0.0.3 h1:hyZ1+8KAIkLzRPeAM68Sg/9e9C1osBS38H1Ii/mhSzU=
-github.com/brilliant-monkey/go-mqtt-client v0.0.3/go.mod h1:Ky8JD/DAEJBdH2vlrjhbYz/OE9Iie2ao/gFzjnrNt54=
+github.com/brilliant-monkey/go-mqtt-client v0.0.4 h1:JK0c/wRUpIjt4s7EQZBwFD0HHSSB3wSq4Ec6Qpclbyg=
+github.com/brilliant-monkey/go-mqtt-client v0.0.4/go.mod h1:Ky8JD/DAEJBdH2vlrjhbYz/OE9Iie2ao/gFzjnrNt54=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=

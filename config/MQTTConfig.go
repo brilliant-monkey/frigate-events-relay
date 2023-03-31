@@ -7,6 +7,7 @@ type MQTTConfig struct {
 	Password string              `yaml:"password"`
 	Producer *TopicConfigSection `yaml:"producer,omitempty"`
 	Consumer *TopicConfigSection `yaml:"consumer,omitempty"`
+	QOS      int                 `yaml:"qos",default:0`
 }
 
 func (c *MQTTConfig) GetEndpoint() string {
@@ -37,4 +38,8 @@ func (c *MQTTConfig) GetConsumerTopic() *string {
 		return &c.Consumer.Topic
 	}
 	return nil
+}
+
+func (c *MQTTConfig) GetConsumerQOS() int {
+	return c.QOS
 }
