@@ -1,9 +1,9 @@
 package main
 
 import (
-	"git.brilliantmonkey.net/frigate/frigate-clips/app"
-	"git.brilliantmonkey.net/frigate/frigate-clips/frigate"
-	"git.brilliantmonkey.net/frigate/frigate-clips/types"
+	"github.com/brilliant-monkey/frigate-kafka-relay/frigate"
+	"github.com/brilliant-monkey/frigate-kafka-relay/types"
+	"github.com/brilliant-monkey/go-app"
 )
 
 const CONFIG_ENVIRONMENT_VARIABLE = "FRIGATE_KAFKA_RELAY_CONFIG_PATH"

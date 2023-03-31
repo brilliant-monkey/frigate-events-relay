@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"log"
 
-	"git.brilliantmonkey.net/frigate/frigate-clips/kafka"
-	"git.brilliantmonkey.net/frigate/frigate-clips/types"
+	"github.com/brilliant-monkey/frigate-kafka-relay/kafka"
+	"github.com/brilliant-monkey/frigate-kafka-relay/types"
 	"github.com/brilliant-monkey/go-mqtt-client"
 )
 

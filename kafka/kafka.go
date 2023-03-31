@@ -6,7 +6,7 @@ import (
 	"log"
 	"time"
 
-	"git.brilliantmonkey.net/frigate/frigate-clips/types"
+	"github.com/brilliant-monkey/frigate-kafka-relay/types"
 	"github.com/segmentio/kafka-go"
 )
 
