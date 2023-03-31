@@ -36,7 +36,7 @@ func (relay *FrigateRelay) mqttMessageCallback(message []byte) {
 	log.Printf("%s: Message received.", id)
 
 	log.Printf("%s: Publishing message to Kafka.", id)
-	err = relay.kafka.Publish(message)
+	err = relay.kafka.Produce(message)
 	if err != nil {
 		log.Printf("%s: Failed to publish message to Kafka. %s", id, err)
 		return
