@@ -3,7 +3,7 @@ module github.com/brilliant-monkey/frigate-kafka-relay
 go 1.18
 
 require (
-	github.com/brilliant-monkey/go-mqtt-client v0.0.3
+	github.com/brilliant-monkey/go-mqtt-client v0.0.4
 	github.com/segmentio/kafka-go v0.4.39 // indirect
 )
 
