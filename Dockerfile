@@ -1,5 +1,5 @@
 
-FROM golang:1.18 AS build
+FROM golang:1.20 AS build
 
 WORKDIR /app
 
@@ -9,7 +9,9 @@ RUN go mod download
 
 RUN go build -o runtime cmd/main.go
 
-FROM linuxserver/ffmpeg
+FROM alpine:3.17
+
+RUN apk add --no-cache libc6-compat
 
 WORKDIR /app
 
