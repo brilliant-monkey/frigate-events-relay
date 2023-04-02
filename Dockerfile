@@ -15,6 +15,12 @@ RUN apk add --no-cache libc6-compat
 
 WORKDIR /app
 
+
 COPY --from=build /app/runtime .
+
+RUN adduser --system runner
+RUN chown runner runtime
+
+USER runner
 
 ENTRYPOINT [ "./runtime" ]
