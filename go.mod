@@ -4,7 +4,7 @@ go 1.18
 
 require (
 	github.com/brilliant-monkey/go-app v0.0.1
-	github.com/brilliant-monkey/go-kafka-client v0.0.4
+	github.com/brilliant-monkey/go-kafka-client v0.0.9
 	github.com/brilliant-monkey/go-mqtt-client v0.0.4
 )
 
