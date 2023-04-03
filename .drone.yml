@@ -3,63 +3,14 @@ type: docker
 name: default
 
 steps:
-- name: "Build"
-  image: plugins/docker
-  settings:
-    repo: git.brilliantmonkey.net/frigate/clips
-    registry: git.brilliantmonkey.net
-    username: docker
-    password:
-      from_secret: GITEA_DOCKER_TOKEN
-    custom_dns:
-      - 10.5.10.8
-    tags:
-      - ${DRONE_BUILD_NUMBER}-${DRONE_COMMIT:0:4}
-  when:
-    event:
-      - push
-- name: "[TAG] Publish to Gitea"
-  image: plugins/docker
-  settings:
-    repo: git.brilliantmonkey.net/frigate/clips
-    registry: git.brilliantmonkey.net
-    username: docker
-    password:
-      from_secret: GITEA_DOCKER_TOKEN
-    custom_dns:
-      - 10.5.10.8
-    tags:
-      - ${DRONE_TAG}
-      - latest
-  when:
-    event:
-      - tag
-- name: "[TAG] Publish to Github"
-  image: plugins/docker
-  settings:
-    repo: ghcr.io/brilliant-monkey/frigate:clips
-    username: docker
-    password:
-      from_secret: GITHUB_CONTAINER_REGISTRY_TOKEN
-    tags:
-      - ${DRONE_TAG}
-      - latest
-    environment:
-      BUILD_ENV: production
-    registry: git.brilliantmonkey.net
-    custom_dns:
-      - 10.5.10.8
-  when:
-    event:
-      - tag
-- name: "[Master] Deploy"
+- name: "[Main] Deploy"
   image: quay.io/honestbee/drone-kubernetes
   settings:
     namespace: default
-    deployment: frigate-clips
+    deployment: ${DRONE_REPO_NAME}
     container: app
-    repo: git.brilliantmonkey.net/frigate/clips
-    tag: ${DRONE_BUILD_NUMBER}-${DRONE_COMMIT:0:4}
+    repo: ghcr.io/${DRONE_REPO}
+    tag: ${DRONE_COMMIT:0:7}
     kubernetes_server:
       from_secret: KUBE_SERVER
     kubernetes_token:
@@ -70,21 +21,21 @@ steps:
     event:
       - push
     branch:
-      - master
+      - main
 - name: "[Tag] Deploy"
   image: quay.io/honestbee/drone-kubernetes
   settings:
     namespace: default
-    deployment: frigate-clips
+    deployment: ${DRONE_REPO_NAME}
     container: app
-    repo: git.brilliantmonkey.net/frigate/clips
+    repo: ghcr.io/${DRONE_REPO}
     tag: ${DRONE_TAG}
     kubernetes_server:
-      from_secret: KUBE_SERVER_PROD
+      from_secret: KUBE_SERVER
     kubernetes_token:
-      from_secret: DRONE_TOKEN_PROD
+      from_secret: DRONE_TOKEN
     kubernetes_cert:
-      from_secret: KUBE_CA_PROD
+      from_secret: KUBE_CA
   when:
     event:
       - tag
@@ -109,7 +60,7 @@ steps:
     event:
       - push
     branch: 
-      - master
+      - main
     status:
       - success
       - failure
