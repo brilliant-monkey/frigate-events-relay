@@ -36,10 +36,10 @@ spec:
               memory: 256Mi
           volumeMounts:
             - mountPath: /app/config.yml
-              subPath: config.yml
+              subPath: secret.yml
               name: secret
       volumes:
         - name: secret
           secret:
-            secretName: frigate-events-relay-secret
+            secretName: frigate-events-relay
             
