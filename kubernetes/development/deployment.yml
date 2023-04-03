@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: frigate-kafka-relay
+  name: frigate-events-relay
   labels:
-    app: frigate-kafka-relay
+    app: frigate-events-relay
     platform: frigate
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: frigate-kafka-relay
+      app: frigate-events-relay
       platform: frigate
   template:
     metadata:
       labels:
-        app: frigate-kafka-relay
+        app: frigate-events-relay
         platform: frigate
     spec:
       containers:
@@ -41,5 +41,5 @@ spec:
       volumes:
         - name: secret
           secret:
-            secretName: frigate-kafka-relay-secret
+            secretName: frigate-events-relay-secret
             
